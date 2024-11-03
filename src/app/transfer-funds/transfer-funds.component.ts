@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './transfer-funds.component.scss'
 })
 export class TransferFundsComponent {
-
-}
+  // Should fetch all accounts
+  // Form should use transaction service to update accounts after transfer
+} 

@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './create-account.component.scss'
 })
 export class CreateAccountComponent {
-
+  // Should fetch all accounts and display them
+  // Form should use transaction service to create a new account
 }

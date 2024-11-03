@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './transaction-history.component.scss'
 })
 export class TransactionHistoryComponent {
-
+  // Should fetch all transactions 
 }

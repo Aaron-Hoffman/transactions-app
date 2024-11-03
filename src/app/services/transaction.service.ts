@@ -14,4 +14,6 @@ export class TransactionService {
   // Get All Accounts Method
 
   // Get Account By Id Method
+
+  // Get all transactions Method
 }
