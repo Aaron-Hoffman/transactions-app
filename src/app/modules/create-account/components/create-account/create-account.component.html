@@ -19,3 +19,10 @@
     <app-custom-button [accountType]="accountForm.value.type || ''" [valid]="accountForm.valid"></app-custom-button>
 </form>
 <p>Account list</p>
+<ul>
+    <li *ngFor="let account of accounts;">
+        <p>{{account.name}}</p>
+        <p>{{account.type}}</p>
+        <p>${{account.balance}}</p>
+    </li>
+</ul>

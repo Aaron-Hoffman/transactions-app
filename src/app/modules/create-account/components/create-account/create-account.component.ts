@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TransactionService } from '../../../../services/transaction.service';
 import { AccountCreateInput } from '../../../../types/types';
 import { SharedModule } from '../../../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-account',
   standalone: true,
-  imports: [ReactiveFormsModule, SharedModule],
+  imports: [CommonModule, ReactiveFormsModule, SharedModule],
   providers: [TransactionService],
   templateUrl: './create-account.component.html',
   styleUrl: './create-account.component.scss'
@@ -15,6 +16,7 @@ import { SharedModule } from '../../../shared/shared.module';
 export class CreateAccountComponent {
   constructor(private formBuilder: FormBuilder, private transactionService: TransactionService) {}
   // Should fetch all accounts and display them
+  accounts = this.transactionService.getAllAccounts();
   // Form should use transaction service to create a new account
   accountForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -32,6 +34,8 @@ export class CreateAccountComponent {
     }
 
     const createdAccount = this.transactionService.createAccount(formData)
+    this.accounts = this.transactionService.getAllAccounts();
     console.log(createdAccount);
+    console.log(this.accounts)
   }
 }

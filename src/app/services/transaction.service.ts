@@ -5,58 +5,61 @@ import { Account, AccountCreateInput, Transaction } from '../types/types';
   providedIn: 'root'
 })
 export class TransactionService {
-  public accounts: Account[] = [];
-  private accountNumber: number = 1;
-
+  
   constructor() { }
 
   // Create Account Method
   createAccount(formInput: AccountCreateInput): Account {
+    const existingAccounts = JSON.parse(localStorage.getItem('accounts') || "[]");
+    const accountNumber = Number(localStorage.getItem('accountNumber')) || 1;
+    const nextAccountNumber = accountNumber + 1 as unknown as string;
+
     const account: Account = {
-      id: this.accountNumber,
+      id: accountNumber,
       name: formInput.name,
       type: formInput.type,
       balance: formInput.balance,
       transactions: []
     }
 
-    this.accounts = [...this.accounts, account]
-    this.accountNumber++;
-    
+
+    localStorage.setItem('accounts', JSON.stringify([...existingAccounts, account]))
+    localStorage.setItem('accountNumber', nextAccountNumber);
+
     return account;
   }
 
   // Transfer Funds Method
-  transferFunds(fromAccount: Account, toAccount: Account, amount: number) {
-    const fromTransaction: Transaction = {
-      id: fromAccount.transactions.length + 1,
-      account: fromAccount,
-      amount: -amount
-    }
+  // transferFunds(fromAccount: Account, toAccount: Account, amount: number) {
+  //   const fromTransaction: Transaction = {
+  //     id: fromAccount.transactions.length + 1,
+  //     account: fromAccount,
+  //     amount: -amount
+  //   }
 
-    const toTransaction: Transaction = {
-      id: toAccount.transactions.length + 1,
-      account: fromAccount,
-      amount: amount
-    }
+  //   const toTransaction: Transaction = {
+  //     id: toAccount.transactions.length + 1,
+  //     account: fromAccount,
+  //     amount: amount
+  //   }
 
-    fromAccount.balance -= amount;
-    fromAccount.transactions = [...fromAccount.transactions, fromTransaction]
-    toAccount.balance += amount;
-    toAccount.transactions = [...toAccount.transactions, toTransaction]
+  //   fromAccount.balance -= amount;
+  //   fromAccount.transactions = [...fromAccount.transactions, fromTransaction]
+  //   toAccount.balance += amount;
+  //   toAccount.transactions = [...toAccount.transactions, toTransaction]
 
-    const fromAccountIndex: number = this.accounts.findIndex(account => account.id == fromAccount.id)
-    const toAccountIndex: number = this.accounts.findIndex(account => account.id == toAccount.id)
+  //   const fromAccountIndex: number = this.accounts.findIndex(account => account.id == fromAccount.id)
+  //   const toAccountIndex: number = this.accounts.findIndex(account => account.id == toAccount.id)
 
-    this.accounts[fromAccountIndex] = fromAccount;
-    this.accounts[toAccountIndex] = toAccount;
+  //   this.accounts[fromAccountIndex] = fromAccount;
+  //   this.accounts[toAccountIndex] = toAccount;
 
-    return 
-  }
+  //   return 
+  // }
 
   // Get All Accounts Method
   getAllAccounts(): Account[] {
-    return this.accounts;
+    return JSON.parse(localStorage.getItem('accounts') || "[]");
   }
 
   // Get Account By Id Method -- Not sure if I need this yet
