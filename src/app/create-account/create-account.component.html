@@ -1,3 +1,21 @@
 <h1>Create an Account</h1>
 <p>Account Creation Form</p>
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Account Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control">
+    </div>
+    <div class="form-group">
+        <p>Account Type</p>
+        <label for="chequing">Chequing</label>
+        <input type="radio" id="chequing" value="chequing" name="type" formControlName="type" class="form-radio-input">
+        <label for="savings">Savings</label>
+        <input type="radio" id="savings" value="savings" name="type" formControlName="type" class="form-radio-input">
+    </div>
+    <div class="form-group">
+        <label for="balance">Initial Balance</label>
+        <input type="number" id="balance" formControlName="balance" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary" [class.disabled]="!accountForm.valid">Create Account</button>
+</form>
 <p>Account list</p>

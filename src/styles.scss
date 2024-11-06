@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
