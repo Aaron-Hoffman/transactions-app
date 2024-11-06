@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Account, Transaction } from '../types/types';
+import { Account, AccountCreateInput, Transaction } from '../types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +11,18 @@ export class TransactionService {
   constructor() { }
 
   // Create Account Method
-  createAccount(): Account {
+  createAccount(formInput: AccountCreateInput): Account {
     const account: Account = {
       id: this.accountNumber,
-      type: 'Checking',
-      balance: 46.50,
+      name: formInput.name,
+      type: formInput.type,
+      balance: formInput.balance,
       transactions: []
     }
 
     this.accounts = [...this.accounts, account]
     this.accountNumber++;
-
+    
     return account;
   }
 
@@ -64,4 +65,4 @@ export class TransactionService {
 //   getAccountTransactions(accountAccount): Transaction[] {
 //     return this.transactions;
 //   }
-// }
+}
