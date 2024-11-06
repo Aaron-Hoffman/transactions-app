@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TransactionService } from '../services/transaction.service';
-import { AccountCreateInput } from '../types/types';
-import { SharedModule } from '../modules/shared/shared.module';
+import { TransactionService } from '../../../../services/transaction.service';
+import { AccountCreateInput } from '../../../../types/types';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-create-account',
