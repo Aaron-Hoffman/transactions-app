@@ -1,2 +1,20 @@
 <h1>Transfer Funds</h1>
-<p>Form to transfer funds</p>
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="from">From Account</label>
+        <select name="from" id="from" formControlName="from">
+            <option *ngFor="let account of accounts;" [value]="account.id">{{ account.name}} - {{ account.type }} - {{ account.balance }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="to">To Account</label>
+        <select name="to" id="to" formControlName="to">
+            <option *ngFor="let account of accounts;" [value]="account.id">{{ account.name}} - {{ account.type }} - {{ account.balance }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="amount">Initial Balance</label>
+        <input type="number" id="amount" formControlName="amount" class="form-control">
+    </div>
+    <app-custom-button [valid]="transferForm.valid"></app-custom-button>
+</form>
