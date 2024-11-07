@@ -1,13 +1,14 @@
 <h1>Transaction History</h1>
-<p>Choose an Account</p>
-<form [formGroup]="accountSelectForm" (change)="onChange()">
-    <div class="form-group">
-        <label for="account">Account</label>
-        <select name="account" id="account" formControlName="account">
-            <option *ngFor="let account of accounts;" [value]="account.id">{{ account.name}} - {{ account.type }} - {{ account.balance }}</option>
-        </select>
-    </div>
-</form>
+<div class="form-wrapper p-3 border rounded my-5">
+    <form [formGroup]="accountSelectForm" (change)="onChange()">
+        <div class="form-group">
+            <label for="account" class="col-form-label">Choose an Account:</label>
+            <select name="account" id="account" formControlName="account" class="form-control">
+                <option *ngFor="let account of accounts;" [value]="account.id">{{ account.name}} - {{ account.type }} - {{ account.balance }}</option>
+            </select>
+        </div>
+    </form>
+</div>
 <p>Transactions</p>
 <ul>
     <li *ngFor="let transaction of selectedAccount.transactions">

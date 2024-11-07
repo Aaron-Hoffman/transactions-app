@@ -1,23 +1,36 @@
 <h1>Create an Account</h1>
-<p>Account Creation Form</p>
-<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="name">Account Name</label>
-        <input type="text" id="name" formControlName="name" class="form-control">
-    </div>
-    <div class="form-group">
-        <p>Account Type</p>
-        <label for="chequing">Chequing</label>
-        <input type="radio" id="chequing" value="chequing" name="type" formControlName="type" class="form-radio-input">
-        <label for="savings">Savings</label>
-        <input type="radio" id="savings" value="savings" name="type" formControlName="type" class="form-radio-input">
-    </div>
-    <div class="form-group">
-        <label for="balance">Initial Balance</label>
-        <input type="number" id="balance" formControlName="balance" class="form-control">
-    </div>
-    <app-custom-button [accountType]="accountForm.value.type || ''" [valid]="accountForm.valid" label="Create Account"></app-custom-button>
-</form>
+<div class="form-wrapper p-3 border rounded my-5">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row mt-2">
+            <label for="name" class="col-sm-2 col-form-label">Account Name</label>
+            <div class="col-sm-10">
+                <input type="text" id="name" formControlName="name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row mt-2">
+            <label for="balance" class="col-sm-2 col-form-label">Initial Balance</label>
+            <div class="col-sm-10">
+                <input type="number" id="balance" formControlName="balance" class="form-control">
+            </div>
+        </div>
+        <fieldset class="form-group mt-2">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Account Type</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <label for="chequing" class="form-check-label">Chequing</label>
+                        <input type="radio" id="chequing" value="chequing" name="type" formControlName="type" class="form-check-input">
+                    </div>
+                    <div class="form-check">
+                        <label for="savings" class="form-check-label">Savings</label>
+                        <input type="radio" id="savings" value="savings" name="type" formControlName="type" class="form-check-input">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <app-custom-button [accountType]="accountForm.value.type || ''" [valid]="accountForm.valid" label="Create Account"></app-custom-button>
+    </form>
+</div>
 <p>Account list</p>
 <ul>
     <li *ngFor="let account of accounts;">
