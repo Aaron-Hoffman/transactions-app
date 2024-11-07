@@ -25,7 +25,4 @@ export class TransactionHistoryComponent {
   onChange() {
     this.selectedAccount = this.transactionService.getAccountById(Number(this.accountSelectForm.value.account))
   }
-
-
-  // Should provide a dropdown to select an account and display all transactions for the selected account
 }

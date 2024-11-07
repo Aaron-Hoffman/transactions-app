@@ -15,9 +15,9 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateAccountComponent {
   constructor(private formBuilder: FormBuilder, private transactionService: TransactionService) {}
-  // Should fetch all accounts and display them
+
   accounts = this.transactionService.getAllAccounts();
-  // Form should use transaction service to create a new account
+
   accountForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     type: ['chequing', [Validators.required]],
@@ -33,9 +33,7 @@ export class CreateAccountComponent {
       balance: balance || 0
     }
 
-    const createdAccount = this.transactionService.createAccount(formData)
-    this.accounts = this.transactionService.getAllAccounts();
-    console.log(createdAccount);
-    console.log(this.accounts)
+    this.transactionService.createAccount(formData)
+    return this.accounts = this.transactionService.getAllAccounts();
   }
 }

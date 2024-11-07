@@ -8,7 +8,6 @@ export class TransactionService {
 
   constructor() { }
 
-  // Create Account Method
   createAccount(formInput: AccountCreateInput): Account {
     const existingAccounts = JSON.parse(localStorage.getItem('accounts') || "[]");
     const accountNumber = Number(localStorage.getItem('accountNumber')) || 1;
@@ -29,7 +28,6 @@ export class TransactionService {
     return account;
   }
 
-  // Transfer Funds Method
   transferFunds(fromAccount: Account, toAccount: Account, amount: number) {
     const fromTransaction: Transaction = {
       id: fromAccount.transactions.length + 1,
@@ -58,7 +56,6 @@ export class TransactionService {
     return localStorage.setItem('accounts', JSON.stringify([...existingAccounts]));
   }
 
-  // Get All Accounts Method
   getAllAccounts(): Account[] {
     return JSON.parse(localStorage.getItem('accounts') || "[]");
   }

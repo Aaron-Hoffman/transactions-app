@@ -17,9 +17,8 @@ export class TransferFundsComponent {
   constructor(private formBuilder: FormBuilder, private transactionService: TransactionService) {}
 
   accounts = this.transactionService.getAllAccounts();
-  // Form should use transaction service to update accounts after transfer
+
   transferForm = this.formBuilder.group({
-    // TODO: Add Validators
     from: ['', [Validators.required]],
     to: ['', [Validators.required, this.notEqualTo('from')]],
     amount: [0, [Validators.required, Validators.min(0.01), Validators.max(0)]],
@@ -61,6 +60,6 @@ export class TransferFundsComponent {
     const toAccount = this.transactionService.getAccountById(Number(to));
     
     this.transactionService.transferFunds(fromAccount, toAccount, Number(amount))
-    this.accounts = this.transactionService.getAllAccounts();
+    return this.accounts = this.transactionService.getAllAccounts();
   }
 } 
