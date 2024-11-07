@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { TransactionService } from '../../../../services/transaction.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
+import { Account } from '../../../../types/types';
 
 @Component({
   selector: 'app-transfer-funds',
@@ -19,10 +20,39 @@ export class TransferFundsComponent {
   // Form should use transaction service to update accounts after transfer
   transferForm = this.formBuilder.group({
     // TODO: Add Validators
-    from: ['', []],
-    to: ['', []],
-    amount: [0, []],
+    from: ['', [Validators.required]],
+    to: ['', [Validators.required, this.notEqualTo('from')]],
+    amount: [0, [Validators.required, Validators.min(0.01), Validators.max(0)]],
   })
+
+  notEqualTo(otherControlName: string) {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+        if (!control.parent) {
+            return null; 
+        }
+
+        const toValue = control.value;
+        const fromValue = control.parent.get(otherControlName)?.value;
+    
+        if (toValue !== fromValue) {
+            return null;
+        }
+
+        return {
+            'notequalto': true
+        }
+    };
+  }
+
+  onChange() {
+    const fromAccount: Account = this.transactionService.getAccountById(Number(this.transferForm.value.from));
+    const amountFormControl = this.transferForm.get('amount');
+    amountFormControl?.clearValidators()
+
+    if (!fromAccount) return amountFormControl?.addValidators([Validators.required, Validators.min(0.01), Validators.max(0)]);
+    
+    return amountFormControl?.addValidators([Validators.required, Validators.min(0.01), Validators.max(fromAccount.balance)]);
+  }
 
   onSubmit() {
     const { from, to, amount } = this.transferForm.value;

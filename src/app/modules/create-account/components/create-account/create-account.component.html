@@ -16,7 +16,7 @@
         <label for="balance">Initial Balance</label>
         <input type="number" id="balance" formControlName="balance" class="form-control">
     </div>
-    <app-custom-button [accountType]="accountForm.value.type || ''" [valid]="accountForm.valid"></app-custom-button>
+    <app-custom-button [accountType]="accountForm.value.type || ''" [valid]="accountForm.valid" label="Create Account"></app-custom-button>
 </form>
 <p>Account list</p>
 <ul>

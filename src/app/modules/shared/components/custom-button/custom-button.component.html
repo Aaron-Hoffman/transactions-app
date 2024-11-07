@@ -1,1 +1,1 @@
-<button type="submit" class="btn" [ngClass]="{'btn-primary': accountType === 'chequing' || accountType === '', 'btn-success': accountType === 'savings', 'disabled': !valid}">Create Account</button>
+<button type="submit" class="btn" [ngClass]="{'btn-primary': accountType === 'chequing' || accountType === '', 'btn-success': accountType === 'savings', 'disabled': !valid}">{{ label }}</button>

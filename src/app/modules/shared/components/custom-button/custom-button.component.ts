@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class CustomButtonComponent {
   @Input() accountType: string = "";
   @Input() valid: boolean = false;
+  @Input() label: string = "Submit";
 }
