@@ -9,9 +9,9 @@
         </div>
     </form>
 </div>
-<p>Transactions</p>
-<ul>
-    <li *ngFor="let transaction of selectedAccount.transactions">
+<h2>Transactions</h2>
+<ul class="list-group form-wrapper">
+    <li *ngFor="let transaction of selectedAccount.transactions" class="list-group-item">
         ${{ transaction.amount }} -- {{ transaction.otherAccountName }}
     </li>
 </ul>

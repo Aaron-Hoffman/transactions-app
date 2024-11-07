@@ -31,11 +31,11 @@
         <app-custom-button [accountType]="accountForm.value.type || ''" [valid]="accountForm.valid" label="Create Account"></app-custom-button>
     </form>
 </div>
-<p>Account list</p>
-<ul>
-    <li *ngFor="let account of accounts;">
-        <p>{{account.name}}</p>
-        <p>{{account.type}}</p>
-        <p>${{account.balance}}</p>
+<h2>Accounts</h2>
+<ul class="list-group form-wrapper">
+    <li *ngFor="let account of accounts;" class="list-group-item">
+        <span>{{account.name}} -- </span>
+        <span class="text-capitalize">{{account.type}} -- </span>
+        <span>${{account.balance}}</span>
     </li>
 </ul>
