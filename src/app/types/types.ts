@@ -14,7 +14,7 @@ export interface AccountCreateInput {
 
 export interface Transaction {
     id: number,
-    otherAccountId: number,
+    otherAccountName: string,
     amount: number
 }
 

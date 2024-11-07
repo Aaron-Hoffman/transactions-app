@@ -18,6 +18,7 @@ export class TransferFundsComponent {
   accounts = this.transactionService.getAllAccounts();
   // Form should use transaction service to update accounts after transfer
   transferForm = this.formBuilder.group({
+    // TODO: Add Validators
     from: ['', []],
     to: ['', []],
     amount: [0, []],

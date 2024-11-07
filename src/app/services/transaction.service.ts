@@ -23,7 +23,7 @@ export class TransactionService {
     }
 
 
-    localStorage.setItem('accounts', JSON.stringify([...existingAccounts, account]))
+    localStorage.setItem('accounts', JSON.stringify([...existingAccounts, account]));
     localStorage.setItem('accountNumber', nextAccountNumber);
 
     return account;
@@ -33,30 +33,29 @@ export class TransactionService {
   transferFunds(fromAccount: Account, toAccount: Account, amount: number) {
     const fromTransaction: Transaction = {
       id: fromAccount.transactions.length + 1,
-      otherAccountId: toAccount.id,
+      otherAccountName: toAccount.name,
       amount: -amount
     }
 
     const toTransaction: Transaction = {
       id: toAccount.transactions.length + 1,
-      otherAccountId: fromAccount.id,
+      otherAccountName: fromAccount.name,
       amount: amount
     }
 
     fromAccount.balance -= amount;
-    fromAccount.transactions = [...fromAccount.transactions, fromTransaction]
+    fromAccount.transactions = [...fromAccount.transactions, fromTransaction];
     toAccount.balance += amount;
-    toAccount.transactions = [...toAccount.transactions, toTransaction]
+    toAccount.transactions = [...toAccount.transactions, toTransaction];
 
     const existingAccounts = JSON.parse(localStorage.getItem('accounts') || "[]");
-    const fromAccountIndex: number = existingAccounts.findIndex((account: Account) => account.id == fromAccount.id)
-    const toAccountIndex: number = existingAccounts.findIndex((account: Account) => account.id == toAccount.id)
+    const fromAccountIndex: number = existingAccounts.findIndex((account: Account) => account.id == fromAccount.id);
+    const toAccountIndex: number = existingAccounts.findIndex((account: Account) => account.id == toAccount.id);
 
     existingAccounts[fromAccountIndex] = fromAccount;
     existingAccounts[toAccountIndex] = toAccount;
-    localStorage.setItem('accounts', JSON.stringify([...existingAccounts]))
 
-    return 
+    return localStorage.setItem('accounts', JSON.stringify([...existingAccounts]));
   }
 
   // Get All Accounts Method
@@ -66,7 +65,7 @@ export class TransactionService {
 
   getAccountById(id: number) {
     const accounts = JSON.parse(localStorage.getItem('accounts') || "[]");
-    const accountIndex: number = accounts.findIndex((account: Account) => account.id === id)
-    return accounts[accountIndex]
+    const accountIndex: number = accounts.findIndex((account: Account) => account.id === id);
+    return accounts[accountIndex];
   }
 }
