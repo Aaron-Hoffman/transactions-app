@@ -3,8 +3,8 @@
     <form [formGroup]="accountSelectForm" (change)="onChange()">
         <div class="form-group">
             <label for="account" class="col-form-label">Choose an Account:</label>
-            <select name="account" id="account" formControlName="account" class="form-control">
-                <option *ngFor="let account of accounts;" [value]="account.id">{{ account.name}} - {{ account.type }} - {{ account.balance }}</option>
+            <select name="account" id="account" formControlName="account" class="form-control text-capitalize">
+                <option *ngFor="let account of accounts;" [value]="account.id">{{ account.name}} -- {{ account.type }} -- ${{ account.balance }}</option>
             </select>
         </div>
     </form>
@@ -12,6 +12,6 @@
 <h2>Transactions</h2>
 <ul class="list-group form-wrapper">
     <li *ngFor="let transaction of selectedAccount.transactions" class="list-group-item">
-        ${{ transaction.amount }} -- {{ transaction.otherAccountName }}
+        {{ transaction.amount > 0 ? 'Received' : 'Sent' }} ${{ transaction.amount.toString().replace('-', '') }} {{ transaction.amount > 0 ? 'From' : 'To' }} {{ transaction.otherAccountName }}
     </li>
 </ul>
