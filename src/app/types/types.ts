@@ -9,11 +9,17 @@ export interface Account {
 export interface AccountCreateInput {
     name: string,
     type: string,
-    balance: number,
+    balance: number
 }
 
 export interface Transaction {
     id: number,
-    account: Account,
-    amount: number,
+    otherAccountId: number,
+    amount: number
+}
+
+export interface TransactionCreateInput {
+    from: Account,
+    to: Account,
+    amount: number
 }

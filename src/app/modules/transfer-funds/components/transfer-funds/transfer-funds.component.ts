@@ -24,18 +24,12 @@ export class TransferFundsComponent {
   })
 
   onSubmit() {
-    // const { name, type, balance } = this.accountForm.value;
-    
-    // const formData: AccountCreateInput = {
-    //   name: name || '',
-    //   type: type || '',
-    //   balance: balance || 0
-    // }
+    const { from, to, amount } = this.transferForm.value;
 
-    // const createdAccount = this.transactionService.createAccount(formData)
-    // this.accounts = this.transactionService.getAllAccounts();
-    // console.log(createdAccount);
-    // console.log(this.accounts)
-    console.log('hello')
+    const fromAccount = this.transactionService.getAccountById(Number(from));
+    const toAccount = this.transactionService.getAccountById(Number(to));
+    
+    this.transactionService.transferFunds(fromAccount, toAccount, Number(amount))
+    this.accounts = this.transactionService.getAllAccounts();
   }
 } 

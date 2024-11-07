@@ -33,13 +33,13 @@ export class TransactionService {
   transferFunds(fromAccount: Account, toAccount: Account, amount: number) {
     const fromTransaction: Transaction = {
       id: fromAccount.transactions.length + 1,
-      account: fromAccount,
+      otherAccountId: toAccount.id,
       amount: -amount
     }
 
     const toTransaction: Transaction = {
       id: toAccount.transactions.length + 1,
-      account: fromAccount,
+      otherAccountId: fromAccount.id,
       amount: amount
     }
 
@@ -54,7 +54,7 @@ export class TransactionService {
 
     existingAccounts[fromAccountIndex] = fromAccount;
     existingAccounts[toAccountIndex] = toAccount;
-    localStorage.setItem('accounts', JSON.stringify(existingAccounts))
+    localStorage.setItem('accounts', JSON.stringify([...existingAccounts]))
 
     return 
   }
@@ -62,5 +62,11 @@ export class TransactionService {
   // Get All Accounts Method
   getAllAccounts(): Account[] {
     return JSON.parse(localStorage.getItem('accounts') || "[]");
+  }
+
+  getAccountById(id: number) {
+    const accounts = JSON.parse(localStorage.getItem('accounts') || "[]");
+    const accountIndex: number = accounts.findIndex((account: Account) => account.id === id)
+    return accounts[accountIndex]
   }
 }
